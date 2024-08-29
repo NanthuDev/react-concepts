@@ -4,11 +4,10 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        
-        
-        
-      </header>
+      <p></p>
+     <input type="button" value="start"/> 
+     <input type="button" value="Stop"/> 
+
     </div>
   );
 }
