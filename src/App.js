@@ -1,31 +1,44 @@
  import { useState } from 'react';
 import './App.css';
 import { useEffect } from 'react';
+let setInter = null;
 
 function App() {
   const [timer,setTimer] = useState(0)
-  let setInter = null;
+  const [start,setStop] = useState(false)
+ 
 
 
-  useEffect(()=>{
-    
-  },[])
+  useEffect(()=>{  
 
-  const start=()=>{
-    TimerControl();
+    if(start === true){
+      console.log( "Started");
+      TimerControl(); 
+    }else{
+      console.log( "Stopped / Not yet start"); 
+      clearInterval(setInter); 
+    }
+    return ()=>clearInterval(setInter)
+  },[ start])
+
+  const startTimer=()=>{
+  //  TimerControl();
+    setStop(true);
   }
   const stop=()=>{ 
+   // clearInterval(setInter);
+    setStop(false)
   }
 
   const TimerControl = ()=>{
     setInter = setInterval(()=>{
-      setTimer(timer+1);
+      setTimer(timer=>timer+1);
     },1000);
   }
   return (
     <div className="App">
       <p>{timer}</p>
-     <input type="button" value="start" onClick={start}/> 
+     <input type="button" value="start" onClick={startTimer}/> 
      <input type="button" value="Stop" onClick={stop}/> 
 
     </div>
